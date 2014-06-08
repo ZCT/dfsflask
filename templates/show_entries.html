@@ -1,0 +1,33 @@
+{% extends "layout.html"%}
+{% block body %}
+{%if session.logged_in %}
+<form action="{{url_for('search') }}" method=post class=add-entry>
+	<d1>
+	<dt>Text:
+	<dd><textarea name=Text type=text  row=1 cols=50></textarea>
+	<dd><input type=submit value=Search>
+	</d1>
+</form>
+{% endif %}
+
+{% if  show_result %}
+{{ pagination.info|safe}}
+{{ pagination.links|safe}}
+<table>
+    <thead>
+
+    </thead>
+    <tbody>
+    {% for entry, url in entries %}
+    <tr>
+	    <td><a href={{url}}>{{entry}}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{{ pagination.links|safe }}
+{% endif %}
+
+
+{% endblock %}
+
